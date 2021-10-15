@@ -18,17 +18,20 @@ function connect() {
     stompClient.connect({}, function (frame) {
         setConnected(true);
         console.log('Connected: ' + frame);
-        stompClient.subscribe('/topic/ticker', function (ticker) {
-            var currentdate = new Date();
-            var datetime = currentdate.getFullYear() + "/"
-                + (currentdate.getMonth()+1)  + "/"
-                + currentdate.getDate() + "@"
-                + currentdate.getHours() + ":"
-                + currentdate.getMinutes() + ":"
-                + currentdate.getSeconds();
+        stompClient.subscribe('/topic/ticker/YSL', function (ticker) {
+            function now() {
+                var currentdate = new Date();
+                var datetime = currentdate.getFullYear() + "/"
+                    + (currentdate.getMonth() + 1) + "/"
+                    + currentdate.getDate() + "@"
+                    + currentdate.getHours() + ":"
+                    + currentdate.getMinutes() + ":"
+                    + currentdate.getSeconds();
+                return datetime;
+            };
 
             var json = JSON.parse(ticker.body)
-            showGreeting(datetime + " " + json.code + ", " + json.price);
+            showGreeting(now() + " " + json.code + ", " + json.price);
         });
     });
 }
