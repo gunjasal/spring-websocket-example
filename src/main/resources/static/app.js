@@ -18,20 +18,15 @@ function connect() {
     stompClient.connect({}, function (frame) {
         setConnected(true);
         console.log('Connected: ' + frame);
-        stompClient.subscribe('/topic/ticker/YSL', function (ticker) {
-            function now() {
-                var currentdate = new Date();
-                var datetime = currentdate.getFullYear() + "/"
-                    + (currentdate.getMonth() + 1) + "/"
-                    + currentdate.getDate() + "@"
-                    + currentdate.getHours() + ":"
-                    + currentdate.getMinutes() + ":"
-                    + currentdate.getSeconds();
-                return datetime;
-            };
 
+        stompClient.subscribe('/topic/ticker', function (ticker) {
             var json = JSON.parse(ticker.body)
-            showGreeting(now() + " " + json.code + ", " + json.price);
+            showGreeting(json.datetime + ": " + json.code + ", " + json.price);
+        });
+
+        stompClient.subscribe('/user/queue/position-updates', function (updates) {
+            var json = JSON.parse(updates.body)
+            showGreeting2("stock updates: " + json);
         });
     });
 }
@@ -48,8 +43,16 @@ function sendName() {
     stompClient.send("/app/ticker", {}, JSON.stringify({'code': $("#name").val()}));
 }
 
+function updateStocks() {
+    stompClient.send("/app/stock-updates");
+}
+
 function showGreeting(message) {
-    $("#greetings").append("<tr><td>" + message + "</td></tr>");
+    $("#greetings").html("<tr><td>" + message + "</td></tr>");
+}
+
+function showGreeting2(message) {
+    $("#greetings2").append("<tr><td>" + message + "</td></tr>");
 }
 
 $(function () {
@@ -59,4 +62,5 @@ $(function () {
     $( "#connect" ).click(function() { connect(); });
     $( "#disconnect" ).click(function() { disconnect(); });
     $( "#send" ).click(function() { sendName(); });
+    $( "#update" ).click(function() { updateStocks(); });
 });

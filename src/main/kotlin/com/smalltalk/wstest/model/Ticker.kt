@@ -1,3 +1,5 @@
 package com.smalltalk.wstest.model
 
-data class Ticker(val code: String, val price: Int)
+import java.time.LocalDateTime
+
+data class Ticker(val code: String, val price: Int, val datetime: LocalDateTime = LocalDateTime.now())
