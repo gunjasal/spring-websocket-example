@@ -8,7 +8,7 @@ import org.springframework.stereotype.Controller
 
 @Controller
 class UserController: Logging() {
-    @MessageMapping("/stock-updates")
+    @MessageMapping("stock-updates")
     @SendToUser("/queue/position-updates")
     fun stockSummary(): List<StockSummary> {
         log.debug("ddd")

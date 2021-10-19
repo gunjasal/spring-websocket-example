@@ -16,11 +16,10 @@ import java.lang.RuntimeException
 import kotlin.random.Random
 
 @Controller
-@MessageMapping("/ticker")
 class TickerController: Logging() {
     @Autowired lateinit var webSocketScopedService: WebSocketScopedService
 
-    @MessageMapping("")
+    @MessageMapping("ticker")
     @SendTo("/topic/ticker")
     fun ticker(tickerRequest: TickerRequest, @Headers headers: Map<String, String>): Ticker {
         Thread.sleep(1000L)

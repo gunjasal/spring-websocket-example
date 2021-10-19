@@ -1,0 +1,13 @@
+spring:
+  profiles:
+    active: local
+  application:
+    name: wstest
+
+server:
+  port: 31112
+  error:
+    include-exception: false
+    include-stacktrace: never
+    whitelabel:
+      enabled: false
