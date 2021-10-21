@@ -24,6 +24,7 @@
 <!--    <logger name="org.springframework.messaging.simp.broker.SimpleBrokerMessageHandler" level="DEBUG"/>-->
 <!--    <logger name="org.springframework.messaging.simp.user.UserDestinationMessageHandler" level="DEBUG"/>-->
 
+    <logger name="com.smalltalk" level="DEBUG"/>
     <root level="INFO">
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="FILE"/>

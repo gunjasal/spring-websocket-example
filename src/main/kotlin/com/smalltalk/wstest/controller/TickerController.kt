@@ -22,8 +22,8 @@ class TickerController: Logging() {
     @MessageMapping("ticker")
     @SendTo("/topic/ticker")
     fun ticker(tickerRequest: TickerRequest, @Headers headers: Map<String, String>): Ticker {
+        log.debug("messaged /app/ticker: ${tickerRequest}")
         Thread.sleep(1000L)
-        log.debug("@@ " + headers)
 
         webSocketScopedService.print()
         return Ticker(tickerRequest.code, Random.nextInt(990, 1010))
@@ -37,7 +37,7 @@ class TickerController: Logging() {
 
     @MessageExceptionHandler
     @SendToUser(destinations= ["/queue/errors"], broadcast=false)
-    fun handleException(): MessageBroadcastError {
+    fun handleException(error: Error): MessageBroadcastError {
         return MessageBroadcastError("## error")
     }
 }
