@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <title>Hello WebSocket</title>
     <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -14,6 +14,13 @@
     enabled. Please enable
     Javascript and reload this page!</h2></noscript>
 <div id="main-content" class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <a sec:authorize="isAnonymous()" th:href="@{/login}">로그인</a>
+            <a sec:authorize="isAuthenticated()" th:href="@{/logout}">로그아웃</a>
+            <span sec:authorize="isAuthenticated()" sec:authentication="name"></span>님 환영합니다~
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-6">
             <form class="form-inline">
