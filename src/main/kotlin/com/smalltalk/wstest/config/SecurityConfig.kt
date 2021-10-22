@@ -20,9 +20,7 @@ class SecurityConfig: WebSecurityConfigurerAdapter() {
     @Autowired lateinit var userService: UserDetailsService
 
     @Bean
-    fun passwordEncoder(): PasswordEncoder {
-        return BCryptPasswordEncoder()
-    }
+    fun passwordEncoder() = BCryptPasswordEncoder()
 
     override fun configure(web: WebSecurity?) {
         web?.ignoring()?.antMatchers("/css/**","/js/**","/img/**","/lib/**",)

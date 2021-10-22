@@ -13,14 +13,18 @@ class UserService: UserDetailsService {
         private val encoder = BCryptPasswordEncoder()
         private fun user(user: String, password: String, vararg roles: String) =
             User.builder().username(user).password(encoder.encode(password)).roles(*roles).build()
-
-        val USERS: Map<String, UserDetails> = mapOf(
-            "ysl" to user("ysl", "ysl", "USER", "ADMIN"),
-            "shc" to user("shc", "shc", "USER")
-        )
     }
 
     override fun loadUserByUsername(name: String?): UserDetails? {
-        return USERS[name]
+        return getUser(name) ?: throw RuntimeException("user not exist: $name")
+
+    }
+
+    fun getUser(name: String?): UserDetails? {
+        // repository mock
+        return mapOf(
+            "ysl" to user("ysl", "ysl", "USER", "ADMIN"),
+            "shc" to user("shc", "shc", "USER")
+        )[name]
     }
 }

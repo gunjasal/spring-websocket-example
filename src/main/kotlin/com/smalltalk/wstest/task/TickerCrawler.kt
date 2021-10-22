@@ -14,7 +14,7 @@ import kotlin.random.Random
 class TickerCrawler: Logging() {
     @Autowired lateinit var simpMessagingTemplate: SimpMessagingTemplate
 
-    @Scheduled(fixedRate = 1000)
+    @Scheduled(fixedRate = 5000)
     @Async
     fun broadcast() {
         val ticker = Ticker("YSL", Random.nextInt(990, 1010))

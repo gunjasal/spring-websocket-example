@@ -16,9 +16,11 @@
 <div id="main-content" class="container">
     <div class="row">
         <div class="col-md-12">
+            <hr/>
             <a sec:authorize="isAnonymous()" th:href="@{/login}">로그인</a>
-            <a sec:authorize="isAuthenticated()" th:href="@{/logout}">로그아웃</a>
             <span sec:authorize="isAuthenticated()" sec:authentication="name"></span>님 환영합니다~
+            <a sec:authorize="isAuthenticated()" th:href="@{/logout}">로그아웃</a>
+            <hr/>
         </div>
     </div>
     <div class="row">
@@ -35,7 +37,7 @@
         <div class="col-md-6">
             <form class="form-inline">
                 <div class="form-group">
-                    <label for="name">What is your name?</label>
+                    <label for="name">broadcast to greetings</label>
                     <input type="text" id="name" class="form-control" placeholder="Your name here...">
                 </div>
                 <button id="send" class="btn btn-default" type="submit">Send</button>
@@ -45,6 +47,12 @@
                     <label for="name">get user stock updates</label>
                 </div>
                 <button id="update" class="btn btn-default" type="submit">Update</button>
+            </form>
+            <form class="form-inline">
+                <div class="form-group">
+                    <label for="name">get personal message</label>
+                </div>
+                <button id="message" class="btn btn-default" type="submit">Message</button>
             </form>
         </div>
     </div>

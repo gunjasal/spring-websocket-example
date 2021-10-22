@@ -26,7 +26,7 @@ function connect() {
 
         stompClient.subscribe('/user/queue/position-updates', function (updates) {
             var json = JSON.parse(updates.body)
-            showGreeting2("stock updates: " + json);
+            showGreeting2("stock updates: " + ": " + json.code + ", " + json.price);
         });
     });
 }
@@ -47,6 +47,10 @@ function updateStocks() {
     stompClient.send("/app/stock-updates");
 }
 
+function personalMessage() {
+    stompClient.send("/app/principal-message")
+}
+
 function showGreeting(message) {
     $("#greetings").html("<tr><td>" + message + "</td></tr>");
 }
@@ -63,4 +67,5 @@ $(function () {
     $( "#disconnect" ).click(function() { disconnect(); });
     $( "#send" ).click(function() { sendName(); });
     $( "#update" ).click(function() { updateStocks(); });
+    $( "#message" ).click(function() { personalMessage(); });
 });

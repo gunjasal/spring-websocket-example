@@ -3,11 +3,11 @@ package com.smalltalk.wstest.service
 import com.smalltalk.wstest.declaration.Logging
 import org.springframework.context.annotation.Scope
 import org.springframework.context.annotation.ScopedProxyMode
-import org.springframework.stereotype.Component
+import org.springframework.stereotype.Service
 import javax.annotation.PostConstruct
 import javax.annotation.PreDestroy
 
-@Component
+@Service
 @Scope(scopeName = "websocket", proxyMode = ScopedProxyMode.TARGET_CLASS)
 class WebSocketScopedService: Logging() {
     @PostConstruct
